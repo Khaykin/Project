@@ -3,6 +3,6 @@ node{
   bat 'pwd'
   bat 'echo'
   pwd()
-  junit '**/build/*.xml'
+  junit allowEmptyResults: true, healthScaleFactor: <object of type java.lang.Double>, testDataPublishers: [[$class: 'AttachmentPublisher']], testResults: 'report'
   mail bcc: '', body: 'test', cc: '', from: '', replyTo: '', subject: 'test', to: 'igor.khaykin@arm.com'
   }
