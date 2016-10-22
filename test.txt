@@ -1,0 +1,552 @@
+<?xml version="1.0" ?>
+<!--
+==========================================================================
+added  
+  contents.xml
+
+  General Description
+     Contains information about component builds for this target.
+
+ Copyright (c) 2011-2011 by Qualcomm Technologies, Incorporated.
+ All Rights Reserved.
+ QUALCOMM Proprietary/GTDR
+
+==========================================================================
+ 
+ $Header: //depot/asic/msm8960/meta/main/latest/contents_template.xml#40 $
+ $DateTime: 2011/10/27 15:00:45 $
+ $Change: 2006892 $
+==========================================================================
+-->
+<contents>
+<product_flavors cmm_pf_var="PRODUCT_FLAVORS">
+    <pf>
+      <name>asic</name>
+      <component>
+        <name>common</name>
+        <flavor>asic</flavor>
+      </component>
+      <component>
+        <name>modem</name>
+        <flavor>asic</flavor>
+      </component>
+    </pf>
+    <pf>
+      <name>virtio</name>
+      <component>
+        <name>common</name>
+        <flavor>virtio</flavor>
+      </component>
+      <component>
+        <name>modem</name>
+        <flavor>virtio</flavor>
+      </component>
+    </pf>
+  </product_flavors>
+  <product_info>
+    <product_name>MSM8994.WP.1.0</product_name>
+    <hlos_type cmm_var="HLOS_TYPE">WP</hlos_type> 
+    <chipid cmm_var="CHIPID">msm8994</chipid>
+  </product_info>
+  <builds_flat>
+    <!-- This section contains a list of all component builds -->
+    <build>
+      <!-- Name of this build -->
+      <name>common</name>
+      <role>common</role>
+      <chipset>msm8994</chipset>
+      <!-- Build ID for this build (QC-Internal) -->
+      <build_id></build_id>
+      <!-- Path to root of this build, on Windows -->
+      <!-- All paths must end in a slash.  All absolute paths
+      must begin with a slash, or drive-letter, colon, slash.  All
+      relative paths must begin with a name. -->
+      <windows_root_path>.\</windows_root_path>
+      <!-- Path to root of this build, on Linux -->
+      <linux_root_path>./</linux_root_path>
+      <!-- Name of top-level, or 'image' directory for this build. -->
+      <image_dir>common</image_dir>
+      <release_path></release_path>
+      <partition_file>
+        <!-- The partition_file section points to the main partition xml file
+        This is used by QPST during its download operation -->
+        <file_name>rawprogram0.xml</file_name>
+        <file_path>common/build/</file_path>
+      </partition_file>
+      <partition_patch_file>
+        <!-- The partition_patch_file section points to the patch partition xml file
+        This is used by QPST during its download operation -->
+        <file_name>patch0.xml</file_name>
+        <file_path>common/build/</file_path>
+      </partition_patch_file>
+    </build>
+	<build>
+      <name>apps</name>
+      <role>apps</role>
+      <chipset>msm8994</chipset>
+      <build_id></build_id>
+      <!-- The 'cmm_root_path_var' attribute names a CMM variable that will be initialized to
+      the value of this element by the gen_cmm_data.py script.  This is used by the
+      Trace32 scripts to find other builds. -->
+      <windows_root_path cmm_root_path_var="APPS_BUILDROOT">.\</windows_root_path>
+      <linux_root_path cmm_root_path_var="APPS_BUILDROOT">./</linux_root_path>
+      <image_dir>WP</image_dir>
+      <release_path></release_path>
+      <file_ref minimized="true" ignore="true">
+        <file_name>wp8.ffu</file_name>
+        <file_path>WP/Packages/QCOM/prebuilt/8994/ffu/wtt_mtp/</file_path>
+      </file_ref>
+      <download_file cmm_file_var="APPSBOOT_BINARY" minimized="true">
+        <file_name>uefi.mbn</file_name>
+        <file_path>WP/Packages/HY11/src/uefi_8994/rel/9.0/edk2/QcomPkg/Msm8994Pkg/Bin32/</file_path>
+      </download_file>
+      <download_file cmm_file_var="APPSCONFIG_BINARY" minimized="true" ignore="true">
+        <file_name>fat16.bin</file_name>
+        <file_path>WP/Packages/QCOM/prebuilt/8994/firmware/8994/8994_MTP_WP/</file_path>
+      </download_file> 
+      <download_file cmm_file_var="EFIESP_BINARY" minimized="true" >
+        <file_name>EFIESP.bin</file_name>
+        <file_path>WP/Packages/QCOM/prebuilt/8994/firmware/</file_path> 
+      </download_file>
+      <download_file cmm_file_var="TZAPPS_BINARY" minimized="true">
+        <file_name>tzapps.bin</file_name>
+        <file_path>WP/Packages/QCOM/prebuilt/8994/firmware/</file_path>
+      </download_file>
+    </build>
+    <build>
+      <name>modem</name>
+      <role>modem</role>
+      <chipset>msm8994</chipset>
+      <build_id></build_id>
+      <windows_root_path cmm_root_path_var="MPSS_BUILDROOT">.\</windows_root_path>
+      <linux_root_path cmm_root_path_var="MPSS_BUILDROOT">./</linux_root_path>
+      <image_dir>modem_proc</image_dir>
+      <release_path>HY11_CompileTest</release_path>
+      <buildfile_path>modem_proc/build/ms/</buildfile_path>
+      <build_command>build.cmd 8994.geni BUILD_ID=FAAAANAZ</build_command>
+            <!--file_ref pil_split="mba">
+        <file_name>mba.mbn</file_name>
+        <file_path>modem_proc/build/ms/bin/${modem_bid:FAAAANAZ}</file_path>
+      </file_ref!-->
+      <!--file_ref pil_split="modem">
+        <file_name>qdsp6sw.mbn</file_name>
+        <file_path flavor="asic">modem_proc/build/ms/bin/${modem_bid:FAAAANAZ}</file_path>
+      </file_ref-->
+      <file_ref ignore="true">
+        <file_name>qdsp6sw.mbn</file_name>
+        <file_path flavor="asic">modem_proc/build/ms/bin/${modem_bid:FAAAANAZ}</file_path>
+      </file_ref>>  
+      <file_ref symbol="modem" >
+        <file_name>M8994${modem_bid:FAAAANAZ}*.elf</file_name>
+        <file_path>modem_proc/build/ms/</file_path>
+      </file_ref>
+      <file_ref debug_script="load_coredump" >
+        <file_name>load_coredump.cmm</file_name>
+        <file_path>modem_proc/core/debugtools/err/cmm</file_path>
+      </file_ref>
+      <file_ref debug_script="recover_f3_messages" >
+        <file_name>recover_f3.cmm</file_name>
+        <file_path>modem_proc/core/services/diag/f3_trace/cmm</file_path>
+      </file_ref>
+      <file_ref debug_script="recover_smem_messages" >
+        <file_name>smemlog.cmm</file_name>
+        <file_path>modem_proc/core/mproc/smem/tools</file_path>
+      </file_ref>
+      <file_ref debug_script="recover_ulog_dumps" >
+        <file_name>ULogDump.cmm</file_name>
+        <file_path>modem_proc/core/power/ulog/scripts</file_path>
+      </file_ref>
+      <file_ref debug_script="recover_npa_dumps" >
+        <file_name>NPADump.cmm</file_name>
+        <file_path>modem_proc/core/power/npa/scripts</file_path>
+      </file_ref>
+      <file_ref debug_script="analyze_qurt_kernel_error_info" >
+        <file_name>analy_qurt_error.cmm</file_name>
+        <file_path>modem_proc/core/kernel/qurt/scripts</file_path>
+      </file_ref>
+      <!--file_ref debug_script="fw_setup_offline" >
+        <file_name>fw_setup_offline.cmm</file_name> 
+        <file_path>modem_proc/fw/scripts</file_path> 
+      </file_ref-->
+      <file_ref debug_script="fw_dump_state_info" ignore="true">
+        <file_name>fw_dump.cmm</file_name>
+        <file_path>modem_proc/fw/scripts</file_path>
+      </file_ref>
+      <file_ref debug_script="parse_smem_messages" >
+        <file_name>smem_log.pl</file_name>
+        <file_path>modem_proc/core/mproc/smem/tools</file_path>
+      </file_ref>
+      <!--file_ref debug_script="fw_parse_diag_messages" >
+        <file_name> fw_dump_parse.exe</file_name> 
+        <file_path>modem_proc/fw/scripts</file_path> 
+      </file_ref-->
+      <download_file cmm_file_var="MBA_BINARY" minimized="true">
+        <file_name>mba.mbn</file_name> 
+        <file_path>modem_proc/build/ms/bin/${modem_bid:FAAAANAZ}/</file_path> 
+      </download_file>
+      <download_file cmm_file_var="MPSS_BINARY" minimized="true" >
+        <file_name>qdsp6sw.mbn</file_name>
+        <file_path>modem_proc/build/ms/bin/${modem_bid:FAAAANAZ}/</file_path>
+      </download_file>
+      <download_file cmm_file_var="MPSS_ELF" minimized="true" clean_for_release="HK11" ignore="true">
+        <file_name>MODEM_PROC_IMG_${modem_bid:FAAAANAZ}Q.elf</file_name>
+        <file_path>modem_proc/build/bsp/modem_proc_img/build/${modem_bid:FAAAANAZ}/</file_path>
+      </download_file>
+      <download_file cmm_file_var="MBA_ELF" minimized="true" clean_for_release="HK11">
+        <file_name>MBA_CORE_IMG_${modem_bid:FAAAANAZ}Q.elf</file_name>
+        <file_path>modem_proc/core/bsp/mba_img/build/${modem_bid:FAAAANAZ}/</file_path>
+      </download_file>
+    </build> 
+    <build>
+      <name>boot</name>
+      <role>boot</role>
+      <chipset>msm8994</chipset>
+      <build_id></build_id>
+      <windows_root_path cmm_root_path_var="BOOT_BUILDROOT">.\</windows_root_path>
+      <linux_root_path cmm_root_path_var="BOOT_BUILDROOT">./</linux_root_path>
+      <image_dir>boot_images</image_dir>
+      <release_path>HY11_CompileTest</release_path>
+      <buildfile_path>boot_images/build/ms/</buildfile_path>
+      <build_command>build.cmd TARGET_FAMILY=8994</build_command>
+      <!--flash_programmer minimized = "true">
+        < The flash_programmer section points to the flash programmer.  This information
+        is used by QPST when downloading a build.>
+        <file_name>MPRG8974.mbn</file_name>
+        <file_path>boot_images/build/ms/bin/EMMCBLD/</file_path>
+      </flash_programmer-->
+	  <!--<device_programmer minimized="true">
+        <file_name>prog_emmc_firehose_8994_ddr.mbn</file_name>
+        <file_path>boot_images/build/ms/bin/8994/</file_path>
+      </device_programmer> -->
+	  <device_programmer minimized="true">
+        <file_name>prog_emmc_firehose_8994_lite.mbn</file_name>
+        <file_path>boot_images/build/ms/bin/8994/</file_path>
+      </device_programmer>
+      <!--<dload_boot_image minimized = "true">
+        The dload_boot_image section is used by QPST to find the first boot image. 
+        <file_name>8974_msimage.mbn</file_name>
+        <file_path>boot_images/build/ms/bin/EMMCBLD/</file_path> 
+      </dload_boot_image> -->
+      <download_file cmm_file_var="PMIC_BINARY" ignore="true" fastboot_complete="true" minimized="true">
+        <file_name>pmic.mbn</file_name>
+        <file_path>boot_images/build/ms/bin/8994/</file_path>
+      </download_file>
+      <download_file minimized = "true" cmm_file_var="BOOT_BINARY" fastboot_complete="true" ignore="true">
+        <file_name>sbl1.mbn</file_name>
+        <file_path>boot_images/build/ms/bin/8994/</file_path>
+      </download_file>
+      <file_ref minimized = "true" ignore="true"> 
+        <file_name>std_buildconfig.cmm</file_name>
+        <file_path>boot_images/core/products/</file_path>
+      </file_ref>
+      <file_ref minimized = "true" >
+        <file_name>*</file_name>
+        <file_path>boot_images/core/storage/tools/ptool/</file_path>
+      </file_ref>
+      <file_ref minimized = "true" ignore="true">
+        <file_name>enable_pmic.emm</file_name>
+        <file_path>boot_images/modem/rfa/pmic/target/common/system/test/T32/</file_path>
+      </file_ref>
+      <file_ref minimized = "true" ignore="true">
+        <file_name>disable_pmic.emm</file_name>
+        <file_path>boot_images/modem/rfa/pmic/target/common/system/test/T32/</file_path>
+      </file_ref>
+      <file_ref minimized = "true" ignore="true">
+        <file_name>jsdcc.elf</file_name>
+        <file_path>boot_images/core/storage/tools/jsdcc/</file_path>
+      </file_ref> 
+      <file_ref minimized = "true">
+        <file_name>mjsdload.cmm</file_name>
+        <file_path>boot_images/core/storage/tools/jsdcc/</file_path>
+      </file_ref> 
+      <file_ref minimized = "true" ignore="true">
+        <file_name>morko_pmic_wr_2.emm</file_name>
+        <file_path>boot_images/modem/rfa/pmic/target/common/system/test/T32/</file_path>
+      </file_ref>
+      <file_ref minimized = "true" >
+        <file_name>hwio.cmm</file_name>
+        <file_path>boot_images/core/systemdrivers/hwio/scripts/msm8994/</file_path>
+      </file_ref>
+      <download_file cmm_file_var="BOOT_ELF" minimized="true" clean_for_release="HK11">
+        <file_name>SBL1_${boot_bid:EAAAANAZ}A.elf</file_name>
+        <file_path>boot_images/core/bsp/bootloaders/sbl1/build/${boot_bid:EAAAANAZ}/</file_path>
+      </download_file>
+      </build>
+    <build>
+      <name>tz</name>
+      <role>tz</role>
+      <chipset>msm8994</chipset>
+      <build_id></build_id>
+      <short_build_path cmm_var="TZ_BUILDID">${tz_bid:EACAANAA}</short_build_path>
+      <windows_root_path cmm_root_path_var="TZ_BUILDROOT">.\</windows_root_path>
+      <linux_root_path cmm_root_path_var="TZ_BUILDROOT">./</linux_root_path>
+      <image_dir>trustzone_images</image_dir>
+      <release_path>HY11_CompileTest</release_path>
+      <download_file minimized = "true" cmm_file_var="BOOT_TZ_MBN" fastboot_complete="true">
+        <file_name>tz.mbn</file_name>
+        <file_path>trustzone_images/build/ms/bin/${tz_bid:EACAANAA}/</file_path>
+      </download_file>
+	  <download_file cmm_file_var="HYP_BINARY" minimized = "true">
+        <file_name>hyp.mbn</file_name>
+        <file_path>trustzone_images/build/ms/bin/${tz_bid:EACAANAA}/</file_path>
+      </download_file>
+	  <download_file cmm_file_var="MON_ELF" minimized="true">
+        <file_name>mon.elf</file_name>
+        <file_path>trustzone_images/core/bsp/monitor/build/${tz_bid:EACAANAA}/</file_path>
+      </download_file>	  
+	  <download_file cmm_file_var="QSEE_ELF" minimized="true">
+        <file_name>qsee.elf</file_name>
+        <file_path>trustzone_images/core/bsp/qsee/build/${tz_bid:EACAANAA}/</file_path>
+      </download_file>
+      <!--download_file minimized = "true" ignore="true">
+        <file_name>tzbsp_no_xpu.mbn</file_name>
+        <file_path>trustzone_images/build/ms/bin/${tz_bid:EACAANAA}/</file_path>
+      </download_file-->
+      <!--download_file minimized = "true" cmm_file_var="TZ_PATH">
+        <file_name>sampleapp.mbn</file_name>
+        <file_path>trustzone_images/build/ms/bin/${tz_bid:EACAANAA}/</file_path>
+      </download_file-->
+      <!--file_ref pil_split="isdbtmm">
+        <file_name>isdbtmm.mbn</file_name>
+        <file_path>trustzone_images/build/ms/bin/${tz_bid:EACAANAA}/</file_path>
+      </file_ref-->	  
+      <!--file_ref pil_split="widevine">
+        <file_name>widevine.mbn</file_name>
+        <file_path>trustzone_images/build/ms/bin/${tz_bid:EACAANAA}/</file_path>
+      </file_ref-->
+      <!--file_ref pil_split="playready">
+        <file_name>playready.mbn</file_name>
+        <file_path>trustzone_images/build/ms/bin/${tz_bid:EACAANAA}/</file_path>
+      </file_ref-->
+      <!--file_ref pil_split="mc_v2">
+        <file_name>mc_v2.mbn</file_name>
+        <file_path>trustzone_images/build/ms/bin/${tz_bid:EACAANAA}/</file_path>
+      </file_ref-->
+      <download_file cmm_file_var="TZ_BINARY" minimized="true">
+        <file_name>tz.mbn</file_name>
+        <file_path>trustzone_images/build/ms/bin/${tz_bid:EACAANAA}/</file_path>
+      </download_file>
+      <!--download_file>
+        <file_name>tzbsp_no_xpu.mbn</file_name>
+        <file_path>trustzone_images/build/ms/bin/${tz_bid:EACAANAA}/</file_path>
+      </download_file-->
+      <!--download_file cmm_file_var="TZ_ELF" minimized="true" clean_for_release="HK11">
+        <file_name>tz.elf</file_name>
+        <file_path>trustzone_images/core/bsp/tzbsp/build/${tz_bid:EACAANAA}/</file_path>
+      </download_file-->  
+    </build>
+    <build>
+      <name>adsp</name>
+      <role>adsp</role>
+      <chipset>msm8994</chipset>
+      <build_id></build_id>
+      <windows_root_path cmm_root_path_var="ADSP_BUILDROOT">.\</windows_root_path>
+      <linux_root_path cmm_root_path_var="ADSP_BUILDROOT">./</linux_root_path>
+      <image_dir>adsp_proc</image_dir>
+      <release_path>HY11_CompileTest</release_path>
+      <file_ref pil_split="adsp" fat_file="true" cmm_file_var="ADSP_BINARY" minimized="true" >
+        <file_name>adsp.mbn</file_name>
+        <file_path>adsp_proc/obj/qdsp6v5_ReleaseG/</file_path>
+      </file_ref>
+    <download_file cmm_file_var="ADSP_ELF" minimized="true" clean_for_release = "true">
+        <file_name>ADSP_PROC_IMG_AAAAAAAAQ.elf</file_name>
+        <file_path>adsp_proc/build/bsp/adsp_link/build/${lpass_bid:AAAAAAAA}/</file_path>
+      </download_file>  
+    </build>
+    <build>
+      <name>cpe</name>
+      <role>cpe</role>
+      <chipset>MSM8994</chipset>
+      <build_id>needtofillwithbuildid</build_id>
+      <windows_root_path cmm_root_path_var="CPE_BUILDROOT">.\</windows_root_path>
+      <linux_root_path cmm_root_path_var="CPE_BUILDROOT">./</linux_root_path>
+      <image_dir>cpe_proc</image_dir>
+      <release_path>HK11</release_path>
+      <file_ref cmm_file_var="CPE_BINARY" fat_file="true" pil_split="cpe" minimized="true">
+        <file_name>cpe.mbn</file_name>
+        <file_path>cpe_proc/build/ms/bin/${cpe_bid:AAAAAAA*}/</file_path>
+      </file_ref>
+      <download_file clean_for_release="true" cmm_file_var="CPE_ELF" minimized="true">
+        <file_name>CPE_PROC_IMG_AAAAAAAAQ.elf</file_name>
+        <file_path>cpe_proc/build/bsp/cpe_link/build/${cpe_bid:AAAAAAA*}/</file_path>
+      </download_file>
+      <buildfile_path>./cpe_proc/build/ms/</buildfile_path>
+      <build_command> cpe guy please put your build comand here | tee cpelog_8084.txt</build_command>
+    </build>
+	<build>
+      <name>rpm</name>
+      <role>rpm</role>
+      <chipset>msm8994</chipset>
+      <build_id></build_id>
+      <windows_root_path cmm_root_path_var="RPM_BUILDROOT">.\</windows_root_path>
+      <linux_root_path cmm_root_path_var="RPM_BUILDROOT">./</linux_root_path>
+      <image_dir>rpm_proc</image_dir>
+      <release_path>HY11_CompileTest</release_path>
+      <download_file minimized = "true" fastboot_complete="true">
+        <file_name>rpm.mbn</file_name>
+        <file_path>rpm_proc/build/ms/bin/${rpm_bid:AAAAANAAR}/</file_path>
+      </download_file> 
+      <file_ref debug_script="recover_ulog_dumps" >
+        <file_name>rpm_ulogdump.cmm</file_name>
+        <file_path>rpm_proc/core/power/ulog/scripts</file_path>
+      </file_ref>
+      <file_ref debug_script="parse_merged_logs" ignore="true">
+        <file_name>rpm_log.py</file_name>
+        <file_path>rpm_proc/core/power/rpm/dal/scripts</file_path>
+      </file_ref>
+      <file_ref debug_script="parse_merged_logs" >
+        <file_name>rpm_log_bfam.py</file_name>
+        <file_path>rpm_proc/core/power/rpm/debug/scripts</file_path>
+      </file_ref>
+      <file_ref debug_script="recover_npa_dumps" >  
+        <file_name>rpm_npadump.cmm</file_name> 
+        <file_path>rpm_proc/core/power/npa/scripts</file_path> 
+      </file_ref> 
+      <download_file cmm_file_var="RPM_BINARY" minimized="true">
+        <file_name>rpm.mbn</file_name>
+        <file_path>rpm_proc/build/ms/bin/${rpm_bid:AAAAANAAR}/</file_path>
+      </download_file>
+      <download_file cmm_file_var="RPM_ELF" minimized="true">
+        <file_name>RPM_AAAAANAAR.elf</file_name>
+        <file_path>rpm_proc/core/bsp/rpm/build/</file_path>
+      </download_file>
+    </build>
+    <build>
+      <name>wlan</name>
+      <role>wlan</role>
+      <chipset>msm8994</chipset>
+      <build_id></build_id>
+      <windows_root_path cmm_root_path_var="CNSS_BUILDROOT">.\</windows_root_path>
+      <linux_root_path cmm_root_path_var="CNSS_BUILDROOT">./</linux_root_path>
+      <image_dir>cnss_proc</image_dir>
+      <release_path></release_path>
+	  <file_ref fat_file="true">
+			<file_name>bdwlan30.bin</file_name>
+			<file_path>cnss_proc/wlan/fw/target/halphy/ftm/host/systemtools/tools/eepromUtil/qc6174/</file_path>
+		  </file_ref>
+		  <file_ref fat_file="true">
+			<file_name>qwlan30.bin</file_name>
+			<file_path>cnss_proc/wlan/fw/target/.output/AR6320/hw.3/bin/</file_path>
+          </file_ref>	
+	  <!--file_ref pil_split="wcnss">
+        <file_name>wcnss.mbn</file_name>
+        <file_path>wcnss_proc/build/ms/bin/8974</file_path>
+      </file_ref-->
+      <!--download_file cmm_file_var="WCNSS_BINARY" minimized="true">
+        <file_name>wcnss.mbn</file_name>
+        <file_path>wcnss_proc/build/ms/bin/8974/</file_path>
+      </download_file-->
+        <!--download_file cmm_file_var="WCNSS_ELF" minimized="true">
+        <file_name>8974_PRONTO.elf</file_name>
+        <file_path>wcnss_proc/build/ms/</file_path>
+      </download_file-->
+    </build>
+	<build>
+      <name>btfm</name>
+      <role>btfm</role>
+      <chipset>msm8994</chipset>
+      <build_id></build_id>
+      <windows_root_path cmm_root_path_var="BTFM_BUILDROOT">.\</windows_root_path>
+      <linux_root_path cmm_root_path_var="BTFM_BUILDROOT">./</linux_root_path>
+      <image_dir>btfm_proc</image_dir>
+	  <release_path></release_path>
+		  <file_ref fat_file="true">
+			<file_name>nvm_tlv_3.0.bin</file_name>
+			<file_path>btfm_proc/bt_30/wcss/bsp/rom/build/SCAQBAF/Test_Files/Linux/</file_path>
+		  </file_ref>
+	      <file_ref fat_file="true">
+			<file_name>rampatch_tlv_3.0.tlv</file_name>
+			<file_path>btfm_proc/bt_30/wcss/bsp/rom/build/SCAQBAF/Test_Files/Linux/</file_path>
+          </file_ref>
+    </build>
+    <build>
+      <name>sdi</name>
+      <role>sdi</role>
+      <chipset>msm8994</chipset>
+      <build_id></build_id>
+      <windows_root_path cmm_root_path_var="SDI_BUILDROOT">.\</windows_root_path>
+      <linux_root_path cmm_root_path_var="SDI_BUILDROOT">./</linux_root_path>
+      <image_dir>debug_image</image_dir>
+      <release_path>HY11_CompileTest</release_path>
+      <!--download_file cmm_file_var="SDI_ELF" minimized="true" clean_for_release="HK11">
+        <file_name>sdi_${sdi_bid:AAAAANAZ}A.elf</file_name>
+        <file_path>debug_image/core/bsp/dbi/dbi/build/${sdi_bid:AAAAANAZ}/</file_path>
+      </download_file-->
+      <download_file cmm_file_var="SDI_BINARY" minimized="true">
+        <file_name>sdi.mbn</file_name>
+        <file_path>debug_image/build/ms/bin/${sdi_bid:AAAAANAZ}/msm8994/</file_path>
+      </download_file>
+    </build>
+    <build>
+      <name>winsecapp</name>
+      <role>winsecapp</role>
+      <chipset>msm8994</chipset>
+      <build_id></build_id>
+      <windows_root_path cmm_root_path_var="WINSECAPP_BUILDROOT">.\</windows_root_path>
+      <linux_root_path cmm_root_path_var="WINSECAPP_BUILDROOT">./</linux_root_path>
+      <image_dir>winsecapp_image</image_dir>
+      <release_path>HY11_CompileTest</release_path>
+      <download_file cmm_file_var="WINSECAPP_BINARY" minimized="true">
+        <file_name>winsecapp.mbn</file_name>
+        <file_path>winsecapp_image/build/ms/bin/${winsecapp_bid:EATAANAA}</file_path>
+      </download_file>
+    </build>
+  </builds_flat>
+  <build_tools>
+    <!-- the build_tools section points to various tools that are used by the
+    update_common_info.py script. -->
+    <!--<tool>
+      <name>fatgen</name>
+      <build>boot</build>
+      <path>boot_images/core/storage/tools/fattool/</path>
+        </tool>
+        <tool>
+      <name>fatadd</name>
+      <build>boot</build>
+      <path>boot_images/core/storage/tools/fattool/</path>
+        </tool>
+        <tool>
+      <name>pil-splitter.py</name>
+      <build>common</build>
+      <path>tools/misc/</path>
+    </tool> -->
+    <tool>
+      <name>ptool</name>
+      <build>boot</build>
+      <path>boot_images/core/storage/tools/ptool/</path>
+    </tool> 
+    <tool>
+      <name>msp</name>
+      <build>boot</build>
+      <path>boot_images/core/storage/tools/ptool/</path>
+    </tool>
+    <tool>
+      <name>checksparse</name>
+      <build>boot</build>
+      <path>boot_images/core/storage/tools/ptool/</path>
+    </tool>
+  </build_tools>
+  <external_tools>
+    <!-- The external_tools section lists the recommended version numbers
+    for various tools.  Though not in use at this time, it could be used by
+    automation tools to start the right version of these tools. -->
+    <tool>
+      <name>trace32</name>
+      <version>S.2011.04.000029708</version> 
+      <path>//qcdfs/qct/qctdata/CoreBSPTarget/8960/T32_recommended</path> 
+    </tool> 
+    <tool>
+      <name>qpst</name>
+      <version>QPST 2.7.373</version>
+      <path>TBD</path>
+    </tool>
+    <tool>
+      <name>qxdm</name>
+      <version>TBD</version>
+      <path>TBD</path>
+    </tool>
+  </external_tools>
+  <builds_nested>
+    <!-- Nested build structure (QC-Internal) -->
+  </builds_nested>
+</contents>
