@@ -8,6 +8,6 @@ node{
   bat 'echo'
   findFiles glob: 'def files = findFiles(glob: \'**/TEST-*.xml\') echo """${files[0].name} ${files[0].path} ${files[0].directory} ${files[0].length} ${files[0].lastModified}"""'
   fileExists '**.xml'
-  junit allowEmptyResults: true, keepLongStdio: true, testResults: ' **/build/test-reports/*.xml'
+  junit allowEmptyResults: true, keepLongStdio: true, testResults: ' **/build/*.xml'
   mail bcc: '', body: 'test', cc: '', from: '', replyTo: '', subject: 'test', to: 'igor.khaykin@arm.com'
   }
