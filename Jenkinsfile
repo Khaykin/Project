@@ -7,7 +7,7 @@ node{
   bat 'mv -v reports.xml Test'
   bat 'dir Test'
   bat 'echo'
-  bat 'python jenkins_hdcp_junit_log_converter.py'
+  //bat 'python jenkins_hdcp_junit_log_converter.py'
   findFiles glob: 'def files = findFiles(glob: \'**/TEST-*.xml\') echo """${files[0].name} ${files[0].path} ${files[0].directory} ${files[0].length} ${files[0].lastModified}"""'
   fileExists '**.xml'
   junit allowEmptyResults: true, keepLongStdio: true, testResults: '**.xml'
