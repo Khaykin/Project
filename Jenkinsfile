@@ -6,6 +6,7 @@ node{
   //bat 'mkdir Test'
   //bat 'mv -v reports.xml Test'
   //bat 'dir Test'
+  echo 'чего хочешь старче?'
   bat 'echo'
   //bat 'python jenkins_hdcp_junit_log_converter.py'
   //findFiles glob: 'def files = findFiles(glob: \'**/TEST-*.xml\') echo """${files[0].name} ${files[0].path} ${files[0].directory} ${files[0].length} ${files[0].lastModified}"""'
