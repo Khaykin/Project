@@ -11,5 +11,5 @@ node{
   findFiles glob: 'def files = findFiles(glob: \'**/TEST-*.xml\') echo """${files[0].name} ${files[0].path} ${files[0].directory} ${files[0].length} ${files[0].lastModified}"""'
   fileExists '**.xml'
   junit allowEmptyResults: true, keepLongStdio: true, testResults: '**.xml'
-  mail bcc: '', body: 'test', cc: '', from: '', replyTo: '', subject: 'test', to: 'igor.khaykin@arm.com'
+  mail bcc: '', body: '', cc: '', from: '', replyTo: '', subject: '', to: 'igor.khaykin@arm.com'
   }
