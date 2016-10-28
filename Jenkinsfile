@@ -12,5 +12,5 @@ node{
   //findFiles glob: 'def files = findFiles(glob: \'**/TEST-*.xml\') echo """${files[0].name} ${files[0].path} ${files[0].directory} ${files[0].length} ${files[0].lastModified}"""'
   //fileExists '**.xml'
   junit allowEmptyResults: true, keepLongStdio: true, testResults: '**.xml'
-  mail bcc: '', body: 'For more info check link: http://192.168.1.3:8080/job/training/', cc: '', from: '', replyTo: '', subject: 'Buid of test finished', to: 'igor.khaykin@arm.com'
+  mail bcc: '', body: 'More info about a build found here: ${env.BUILD_URL}', cc: '', from: '', replyTo: '', subject: "Job '${env.JOB_NAME}' (${env.BUILD_NUMBER}) status ${currentBuild.result}", to: 'igor.khaykin@arm.com'
   }
