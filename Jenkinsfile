@@ -22,6 +22,6 @@ node{
   stage 'Send e-mail' 
              mail (to: 'igor.khaykin@arm.com', cc: 'daturkeen@gmail.com',
         subject: "Job ${env.JOB_NAME} #${env.BUILD_NUMBER} status ${currentBuild.result}", 
-		   body: "More info about a build found here: ${env.BUILD_URL}", 
+		   body: "More info about a build #${env.BUILD_NUMBER} finished during ${currentBuild.duration} found here: ${env.BUILD_URL}", 
             mimeType:'text/html')
   }
