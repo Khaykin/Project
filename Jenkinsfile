@@ -19,7 +19,7 @@ node{
   //fileExists '**.xml'
   stage 'collecting of results'
   bat 'dir'
-  BAT 'python ./jenkins_hdcp_junit_log_converter.py {} ;'
+  BAT 'python jenkins_hdcp_junit_log_converter.py {} ;'
   junit allowEmptyResults: true, keepLongStdio: true, testResults: '**.xml'
   //mail bcc: '', body: 'More info about a build found here: '${env.BUILD_URL}', cc: '', from: '', replyTo: '', subject: "Job '${env.JOB_NAME}' (${env.BUILD_NUMBER}) status ${currentBuild.result}", to: ('igor.khaykin@arm.com')
   //mail bcc: '', body: '\'More info about a build found here: \'${env.BUILD_URL}', cc: '', from: '', replyTo: '', subject: 'Job \'${env.JOB_NAME}\' (${env.BUILD_NUMBER}) status ${currentBuild.result}', to: 'igor.khaykin@arm.com'
