@@ -11,6 +11,7 @@ node{
   stage 'cheking'
   bat 'git tag'
   echo 'wo za gavno?'
+  bat "${mvnHome}\\bin\\mvn -B verify"
   bat 'echo'
   //bat 'python jenkins_hdcp_junit_log_converter.py'
   //findFiles glob: 'def files = findFiles(glob: \'**/TEST-*.xml\') echo """${files[0].name} ${files[0].path} ${files[0].directory} ${files[0].length} ${files[0].lastModified}"""'
