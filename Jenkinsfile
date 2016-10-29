@@ -11,6 +11,7 @@ node{
   stage 'cheking'
   bat 'git tag'
   echo 'wo za gavno?'
+  def mvnHome = tool 'M3'
   bat "${mvnHome}\\bin\\mvn -B verify"
   bat 'echo'
   //bat 'python jenkins_hdcp_junit_log_converter.py'
