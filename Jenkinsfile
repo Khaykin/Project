@@ -16,6 +16,7 @@ node{
   //findFiles glob: 'def files = findFiles(glob: \'**/TEST-*.xml\') echo """${files[0].name} ${files[0].path} ${files[0].directory} ${files[0].length} ${files[0].lastModified}"""'
   //fileExists '**.xml'
   stage 'collecting of results'
+  bat 'dir'
   bat 'python jenkins_hdcp_junit_log_converter.py'
   junit allowEmptyResults: true, keepLongStdio: true, testResults: '**.xml'
   //mail bcc: '', body: 'More info about a build found here: '${env.BUILD_URL}', cc: '', from: '', replyTo: '', subject: "Job '${env.JOB_NAME}' (${env.BUILD_NUMBER}) status ${currentBuild.result}", to: ('igor.khaykin@arm.com')
