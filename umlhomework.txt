@@ -1,0 +1,34 @@
+
+<Class>
+Car
+
+color :  String      // if int > http://www.ascii-code.com/html-color-names.php
+speed : int
+model : String
+id : int
+
+
+Car()
+Car(int, String, int, String)
+
+getcolor(): String
+setcolor(String): void
+ 
+getspeed(): int
+setspeed(int): void
+
+getmodel(): String
+setmodel(String): void
+
+getid(): int
+setid(int): void
+
+public static int drive.Car(color, speed, model, id) {
+   // body
+   if (color!= NULL && model != NULL && id!= 0){
+       System.out.println("Can drive!");
+	   drive.getspeed();
+    else 
+	   System.out.println("Can't drive, not found a car!");
+	}
+}
