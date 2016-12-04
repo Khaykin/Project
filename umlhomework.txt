@@ -23,6 +23,8 @@ setmodel(String): void
 getid(): int
 setid(int): void
 
+drive(int): void
+
 public static int drive.Car(color, speed, model, id) {
    // body
    if (color!= NULL && model != NULL && id!= 0){
