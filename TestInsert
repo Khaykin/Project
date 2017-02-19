@@ -1,0 +1,57 @@
+package core.db;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import classes.Person;
+
+public class TestInsert {
+
+	public static void main(String[] args) {
+
+		ConnectionPool connectionPool = null;
+		try {
+			connectionPool = ConnectionPool.getInstance();
+
+			// get connection from pool
+			Connection con = connectionPool.getConnection();
+			String sql = "insert into person values(?,?,?,?)";
+
+			List<Person> persons = new ArrayList<>();
+			for (int i = 1; i <= 10; i++) {
+				persons.add(new Person(i, "name" + i, 150 + i, new Date(System.currentTimeMillis() - i * 10000)));
+			}
+
+			try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+				for (Person p : persons) {
+					// set the pstmt ? with actual arguments
+					pstmt.setInt(1, p.getId());
+					pstmt.setString(2, p.getName());
+					pstmt.setDouble(3, p.getHeight());
+					// convert the person java.util.Date to java.sql.Date
+					pstmt.setDate(4, new java.sql.Date(p.getBirthdate().getTime()));
+					// execute the sql
+					pstmt.executeUpdate();
+					System.out.println(p + " inserted to database");
+				}
+
+			}finally {
+				connectionPool.returnConnection(con);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				connectionPool.closeAllConnections();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+}
